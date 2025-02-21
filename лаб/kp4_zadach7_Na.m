@@ -1,0 +1,18 @@
+clear;
+clc;
+s=tf('s');
+% W=exp(-s*T1)*20/(T2*s+1);
+W=(30*(1-exp(-s*0.1)))/(s*(s+3.6)*(s+15));
+figure(1);
+Wclose=feedback(W,1);
+% Wclose=W;
+step(Wclose);
+hold on;
+WDclose=c2d(Wclose,0.1);
+step(WDclose);
+hold off;
+grid;
+WDopen=c2d(W,0.1);
+figure(2);
+nyquist(W);
+grid;
